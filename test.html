@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animirana krugla animacija</title>
+    <style>
+        body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #050210;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.outer-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(#fb5dad, #55fb9f, #b97aff);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(360deg);
+  animation: rotateCircles 2s linear infinite;
+  overflow: hidden;
+}
+
+.inner-circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: #050210;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 15px #fb5dad) drop-shadow(0 0 15px #55fb9f) drop-shadow(0 0 15px #b97aff); 
+  background: radial-gradient(45deg, #fb5dad, #55fb9f, #b97aff);
+}
+
+@keyframes rotateCircles {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.inner-circle::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: repeating-radial-gradient(45deg, #fb5dad, #55fb9f, #b97aff);
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  z-index: -1;
+  box-shadow: 0 0 20px #fb5dad, 0 0 20px #55fb9f, 0 0 20px #b97aff;
+  animation: rotateglow 2s linear infinite;
+}
+
+
+
+@keyframes glow {
+    0% {
+        filter: brightness(100%) saturate(100%) drop-shadow(0 0 5px #fb5dad);
+        opacity: 0.5;
+        filter:blur(10px);
+    }
+    50% {
+        filter: brightness(200%) saturate(200%) drop-shadow(0 0 20px #55fb9f);
+        opacity: 1;
+        filter: blur(20px);
+    }
+    100% {
+        filter: brightness(100%) saturate(100%) drop-shadow(0 0 5px #b97aff);
+        opacity: 0.5;
+        filter: blur(10px);
+    }
+}
+
+
+
+@keyframes rotateGlow {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+  <div class="outer-circle"></div>
+  <div class="inner-circle"></div>
+</div>
+</body>
+</html>
